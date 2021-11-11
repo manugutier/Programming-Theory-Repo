@@ -6,11 +6,19 @@ public class Vehicle : MonoBehaviour
 {
     protected float speed;
 
-    private int minimumCapacity = 1;
+    private int capacity = 1;
     public int currentCapacity
     {
-        get { return minimumCapacity; }
-        set { minimumCapacity = value; }
+        get { return capacity; }
+        set { 
+                if (value <= 0)
+                {
+                    Debug.LogError("You can't set this value to zero or a negative number");
+                } else
+                {
+                    capacity = value;
+                }
+            }
     }
 
     // Start is called before the first frame update
@@ -27,11 +35,19 @@ public class Vehicle : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        Debug.Log("Vehicle's properties:\nSpeed: " + speed + "\nCapacity: " + currentCapacity);
+        Debug.Log("Vehicle's properties:\nSpeed: " + speed + " | Capacity: " + capacity);
     }
 
     public virtual void Move()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    protected void DestroyVehicle()
+    {
+        if (transform.position.z > 50)
+        {
+            Destroy(gameObject);
+        }
     }
 }
