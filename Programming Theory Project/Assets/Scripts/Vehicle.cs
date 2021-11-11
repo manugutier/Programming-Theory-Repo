@@ -6,6 +6,7 @@ public class Vehicle : MonoBehaviour
 {
     protected float speed;
 
+    // ENCAPSULATION
     private int capacity = 1;
     public int currentCapacity
     {
